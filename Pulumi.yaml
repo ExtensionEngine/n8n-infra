@@ -1,0 +1,12 @@
+name: n8n
+description: Infrastructure provisioning for n8n
+runtime:
+  name: nodejs
+  options:
+    packagemanager: pnpm
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: aws-typescript
+  n8n:port: 5678
+  n8n:hostedZoneId: Z02311331OB53ZPGY9YFJ
