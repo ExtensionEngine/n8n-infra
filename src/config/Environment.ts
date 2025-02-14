@@ -1,6 +1,6 @@
 import { ecs, ssm } from '@pulumi/aws';
 import { Output } from '@pulumi/pulumi';
-import { Database, Services }from '@studion/infra-code-blocks';
+import { Database, Services } from '@studion/infra-code-blocks';
 
 type Args = {
   dbServiceName: string;
@@ -19,9 +19,10 @@ class Environment {
   private getPlainParam(name: string): [string, Output<string>] {
     return [
       name,
-      ssm.getParameterOutput({ 
-        name: `${this.path}${name}`,
-      })
+      ssm
+        .getParameterOutput({
+          name: `${this.path}${name}`,
+        })
         .apply(({ value }) => value),
     ];
   }
@@ -35,9 +36,9 @@ class Environment {
       env.set('DB_POSTGRESDB_DATABASE', db.instance.dbName);
       env.set('DB_POSTGRESDB_HOST', db.instance.address);
       env.set('DB_POSTGRESDB_USER', db.instance.username);
-      env.set('DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED', 'false',);
-      env.set('NODE_ENV', 'production',);
-      env.set('N8N_PORT', args.port,);
+      env.set('DB_POSTGRESDB_SSL_REJECT_UNAUTHORIZED', 'false');
+      env.set('NODE_ENV', 'production');
+      env.set('N8N_PORT', args.port);
       env.set(...this.getPlainParam('N8N_LOG_LEVEL'));
       env.set('N8N_EMAIL_MODE', 'smtp');
       env.set('N8N_SMTP_SSL', 'false');

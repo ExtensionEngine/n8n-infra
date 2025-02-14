@@ -18,10 +18,11 @@ class Secrets {
   private getSecureParam(name: string): [string, Output<string>] {
     return [
       name,
-      ssm.getParameterOutput({
-        name: `${this.path}${name}`,
-        withDecryption: false,
-      })
+      ssm
+        .getParameterOutput({
+          name: `${this.path}${name}`,
+          withDecryption: false,
+        })
         .apply(({ arn }) => arn),
     ];
   }
