@@ -1,6 +1,6 @@
 # n8n IaC
 
-Infrastructure as code for Studion's self-hosted n8n powered by infra-code-blocks.
+Infrastructure as code for Studion's self-hosted n8n, built with [infra-code-blocks](https://github.com/ExtensionEngine/infra-code-blocks).
 
 ## Requierments
 
