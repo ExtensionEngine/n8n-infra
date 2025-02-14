@@ -1,6 +1,9 @@
 {
     "name": "n8n",
     "main": "src/index.ts",
+    "scripts": {
+        "format": "prettier -w ."
+    },
     "dependencies": {
         "@pulumi/aws": "^6.67.0",
         "@pulumi/awsx": "^2.21.0",
