@@ -24,42 +24,42 @@ const stack = pulumi.getStack();
 const dbServiceName = `n8n-${stack}-db`;
 
 const infra = new icb.Project(`n8n-${stack}`, {
-	services: [
-		{
-			type: 'DATABASE',
-			serviceName:  dbServiceName,
-			engineVersion: pgVersion,
-			allowMajorVersionUpgrade: true,
-			dbName: `${stack}db`,
-			username: `${stack}master`,
-		},
-		{
-			type: 'WEB_SERVER',
-			serviceName: `n8n-${stack}-server`,
-			port: +port,
-			image: dockerImage,
+  services: [
+    {
+      type: 'DATABASE',
+      serviceName: dbServiceName,
+      engineVersion: pgVersion,
+      allowMajorVersionUpgrade: true,
+      dbName: `${stack}db`,
+      username: `${stack}master`,
+    },
+    {
+      type: 'WEB_SERVER',
+      serviceName: `n8n-${stack}-server`,
+      port: +port,
+      image: dockerImage,
       size: serverSize,
       desiredCount: +serverCount,
       domain,
       hostedZoneId,
       healthCheckPath: '/healthz',
       persistentStorageConfig: {
-      	volumes: [
-      		{
-      			name: `${stack}-user-dir-volume`, 
-      		},
-      	],
-	      mountPoints: [
-	      	{
-	        	sourceVolume: `${stack}-user-dir-volume`,
-	        	containerPath:  '/home/node/.n8n',
-	      	},
-	      ],
+        volumes: [
+          {
+            name: `${stack}-user-dir-volume`,
+          },
+        ],
+        mountPoints: [
+          {
+            sourceVolume: `${stack}-user-dir-volume`,
+            containerPath: '/home/node/.n8n',
+          },
+        ],
       },
       environment: env.get({ dbServiceName, port }),
       secrets: secrets.get({ dbServiceName }),
-		},
-	],
+    },
+  ],
 });
 
 export default infra.name;
