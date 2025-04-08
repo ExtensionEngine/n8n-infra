@@ -1,10 +1,11 @@
 # n8n IaC
 
-Infrastructure as code for Studion's self-hosted n8n, built with [infra-code-blocks](https://github.com/ExtensionEngine/infra-code-blocks).
+Infrastructure as code for Studion's self-hosted n8n, built with [infra-code-blocks](https://github.com/ExtensionEngine/infra-code-blocks). 
+Originally intended for n8n instances under the `*.n8n.gostudion.com` domain, but can be easily customized for others as well.
 
 ## Requierments
 
-- Pulumi account
+- Pulumi account (can be avoided for testing or prototyping by using the local backend)
 - Set of AWS credentials with privilege to manage target resources
 
 ## Usage
@@ -57,10 +58,28 @@ sudo ./aws/install
         * `WEBHOOK_URL` - URL for webhooks with external services, e.g. https://dev.n8n.gostudion.com/
     - Defining secret parameter:
         * `N8N_SMTP_PASS` - SMTP password
+- Create a new stack for a custom use case
+
+```
+pulumi stack init <custom-stack-name>  
+```
+
+- To list stacks and select a default stack to operate on
+
+```
+# List stacks
+pulumi stack ls
+
+# Select a default stack to operate on, i.e. choose an active stack
+pulumi stack select <custom-stack-name>
+```
 - Deploy stack
 
 ```
 pulumi up
+
+# Optionally provide stack to operate on if you want to use non-active stack
+pulumi up -s <custom-stack-name>
 
 # Optionally provide `AWS_PROFILE` env if you want to use non-default AWS profile
 AWS_PROFILE=n8n.dev pulumi up
