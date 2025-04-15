@@ -1,5 +1,6 @@
 config:
   aws:region: us-east-1
+  n8n:hostedZoneId: Z02311331OB53ZPGY9YFJ
   n8n:domain: dev.n8n.gostudion.com
   n8n:pgVersion: 17.2
   n8n:dockerImage: n8nio/n8n:1.89.1
