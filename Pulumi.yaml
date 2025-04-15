@@ -9,4 +9,3 @@ config:
     value:
       pulumi:template: aws-typescript
   n8n:port: 5678
-  n8n:hostedZoneId: Z02311331OB53ZPGY9YFJ
