@@ -2,7 +2,7 @@ config:
   aws:region: us-east-1
   n8n:domain: dev.n8n.gostudion.com
   n8n:pgVersion: 17.2
-  n8n:dockerImage: n8nio/n8n:1.76.3
+  n8n:dockerImage: n8nio/n8n:1.89.1
   n8n:serverSize: small
   n8n:serverCount: 1
   n8n:envPath: /n8n/dev/env/
